@@ -1,48 +1,30 @@
 """
 File with class for TicTacGame
 """
+from map import Map
+
 
 class TicTacGame:
     """
     Class for TicTacGame
     """
-
-
-    def show_board(board):
-        """
-        Print board
-        :param board:
-        :return nothing:
-        """
-        for i in range(3):
-            print('|', board[0 + i * 3], '|', board[1 + i * 3],\
-                  '|', board[2 + i * 3], '|')
-            print("-------------")
-
-
-    def validate_input(value):
+    def validate_input(self, value, board):
         """
         ValueError
         IndexError
         :return:
         """
-        try:
-            if value.isdigit():
-                value = int(value)
-                if value > 8 or value < 0:
-                    raise IndexError
-                else:
-                    return value
-            else:
-                raise ValueError
+        if not value.isdigit():
+            raise TypeError('Wrong type')
 
-        except ValueError:
-            print('Wrong value')
-            exit()
+        value = int(value)
+        if value > 9 or value < 1:
+            raise IndexError('Wrong index')
 
-        except IndexError:
-            print('Wrong index')
-            exit()
+        if board.map[value] == 'X' or board.map[value] == 'O':
+            raise ValueError('This cell is not free')
+        return value
+
 
 
     def start_game(self):
@@ -52,28 +34,27 @@ class TicTacGame:
         """
         count = 0
         players = {'X': '', 'O': ''}
-        board = [i for i in range(9)]
+        board = Map()
 
         players['X'] = input('Enter your name\n')
         players['O'] = input('Enter your name\n')
 
-        self.show_board(board)
+        board.print_map()
         while self.check_winner(board, players, count):
             if count % 2 != 0:
-                value = input('{}, your turn\n'.format(players['X']))
-                _x = self.validate_input(value)
-                board[_x] = 'X'
-                self.show_board(board)
+                value = input(f'{players["X"]}, your turn\n') - 1
+                _x = self.validate_input(value, board)
+                board.set_value(_x, 'X')
+                board.print_map()
             else:
-                value = input('{}, your turn\n'.format(players['O']))
-                _o = self.validate_input(value)
-                board[_o] = 'O'
-                self.show_board(board)
+                value = input(f'{players["O"]}, your turn\n') - 1
+                _o = self.validate_input(value, board)
+                board.set_value(_o, 'O')
+                board.print_map()
 
             count += 1
 
-
-    def check_winner(board, players, count):
+    def check_winner(self, board, players, count):
         """
         Checking the end of the game
         :return True or False:
@@ -86,9 +67,9 @@ class TicTacGame:
                             (2, 4, 6), (0, 3, 6), (1, 4, 7), (2, 5, 8),)
 
         for comb in win_combinations:
-            if board[comb[0]] == board[comb[1]] == board[comb[2]]:
-                sym = board[comb[0]]
-                print('{} WIN'.format(players[sym]))
+            if board.map[comb[0]] == board.map[comb[1]] == board.map[comb[2]]:
+                sym = board.map[comb[0]]
+                print(f'{players[sym]} WIN')
 
                 return False
 
