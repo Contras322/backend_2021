@@ -8,24 +8,45 @@ class TicTacGame:
     """
     Class for TicTacGame
     """
-    def validate_input(self, value, board):
+    board = Map()
+
+    def validate_input(self, value):
         """
         ValueError
         IndexError
         :return:
         """
         if not value.isdigit():
-            raise TypeError('Wrong type')
+            raise TypeError
 
-        value = int(value)
-        if value > 9 or value < 1:
-            raise IndexError('Wrong index')
+        value = int(value) - 1
+        if value > 8 or value < 0:
+            raise IndexError
 
-        if board.map[value] == 'X' or board.map[value] == 'O':
-            raise ValueError('This cell is not free')
+        if self.board.map[value] == 'X' or self.board.map[value] == 'O':
+            raise ValueError
+
         return value
 
+    def handing_errors(self, value):
+        """
+        Handing some errors
+        :param value:
+        :return:
+        """
+        try:
+            value = self.validate_input(value)
+        except IndexError:
+            print('Wrong index')
+        except ValueError:
+            print('This cell is not free')
+        except TypeError:
+            print('Wrong type')
+        else:
+            return value
 
+        exit()
+        return None
 
     def start_game(self):
         """
@@ -34,27 +55,20 @@ class TicTacGame:
         """
         count = 0
         players = {'X': '', 'O': ''}
-        board = Map()
+        syms = ['X', 'O']
 
         players['X'] = input('Enter your name\n')
         players['O'] = input('Enter your name\n')
 
-        board.print_map()
-        while self.check_winner(board, players, count):
-            if count % 2 != 0:
-                value = input(f'{players["X"]}, your turn\n') - 1
-                _x = self.validate_input(value, board)
-                board.set_value(_x, 'X')
-                board.print_map()
-            else:
-                value = input(f'{players["O"]}, your turn\n') - 1
-                _o = self.validate_input(value, board)
-                board.set_value(_o, 'O')
-                board.print_map()
+        self.board.print_map()
+        while self.check_winner(players, count):
+            value = input(f'{players[syms[count % 2]]}, your turn\n')
+            self.board.set_value(self.handing_errors(value), syms[count % 2])
+            self.board.print_map()
 
             count += 1
 
-    def check_winner(self, board, players, count):
+    def check_winner(self, players, count):
         """
         Checking the end of the game
         :return True or False:
@@ -67,8 +81,8 @@ class TicTacGame:
                             (2, 4, 6), (0, 3, 6), (1, 4, 7), (2, 5, 8),)
 
         for comb in win_combinations:
-            if board.map[comb[0]] == board.map[comb[1]] == board.map[comb[2]]:
-                sym = board.map[comb[0]]
+            if self.board.map[comb[0]] == self.board.map[comb[1]] == self.board.map[comb[2]]:
+                sym = self.board.map[comb[0]]
                 print(f'{players[sym]} WIN')
 
                 return False
