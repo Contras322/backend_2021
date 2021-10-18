@@ -1,5 +1,5 @@
 """
-File with class for TicTacGame
+Class TicTacGame with some funs
 """
 from map import Map
 
@@ -28,24 +28,28 @@ class TicTacGame:
 
         return value
 
-    def handing_errors(self, value):
+    def handing_errors(self, player):
         """
         Handing some errors
         :param value:
         :return:
         """
-        try:
-            value = self.validate_input(value)
-        except IndexError:
-            print('Wrong index')
-        except ValueError:
-            print('This cell is not free')
-        except TypeError:
-            print('Wrong type')
-        else:
-            return value
+        while True:
+            try:
+                value = input(f'{player}, your turn\n')
+                value = self.validate_input(value)
+            except IndexError:
+                print('Wrong index')
+                continue
+            except ValueError:
+                print('This cell is not free')
+                continue
+            except TypeError:
+                print('Wrong type')
+                continue
+            else:
+                return value
 
-        exit()
         return None
 
     def start_game(self):
@@ -62,8 +66,7 @@ class TicTacGame:
 
         self.board.print_map()
         while self.check_winner(players, count):
-            value = input(f'{players[syms[count % 2]]}, your turn\n')
-            self.board.map[self.handing_errors(value)] = syms[count % 2]
+            self.board.map[self.handing_errors(players[syms[count % 2]])] = syms[count % 2]
             self.board.print_map()
 
             count += 1

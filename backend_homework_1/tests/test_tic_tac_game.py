@@ -23,8 +23,6 @@ class TestTicTacGame(unittest.TestCase):
         :return:
         """
         self.assertEqual(self.game.validate_input(self.game, '1'), 0)
-        self.assertEqual(self.game.validate_input(self.game, '8'), 7)
-        self.assertEqual(self.game.validate_input(self.game, '4'), 3)
 
     def test_raises(self):
         """
@@ -32,7 +30,6 @@ class TestTicTacGame(unittest.TestCase):
         :return:
         """
         self.assertRaises(TypeError, self.game.validate_input, self.game, 'asdfs')
-        self.assertRaises(TypeError, self.game.validate_input, self.game, 'asd12')
         self.assertRaises(IndexError, self.game.validate_input, self.game, '123123')
 
     def test_draw(self):
