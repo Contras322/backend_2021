@@ -11,15 +11,6 @@ class Map():
         """
         self.map = [i for i in range(1, 10)]
 
-    def set_value(self, pos, val):
-        """
-        set value in the cell
-        :param pos:
-        :param val:
-        :return nothing:
-        """
-        self.map[pos] = val
-
     def print_map(self):
         """
         print map

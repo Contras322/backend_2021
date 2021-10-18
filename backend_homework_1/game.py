@@ -57,13 +57,13 @@ class TicTacGame:
         players = {'X': '', 'O': ''}
         syms = ['X', 'O']
 
-        players['X'] = input('Enter your name\n')
-        players['O'] = input('Enter your name\n')
+        players['X'] = input('Player 1, enter your name\n')
+        players['O'] = input('Player 2, enter your name\n')
 
         self.board.print_map()
         while self.check_winner(players, count):
             value = input(f'{players[syms[count % 2]]}, your turn\n')
-            self.board.set_value(self.handing_errors(value), syms[count % 2])
+            self.board.map[self.handing_errors(value)] = syms[count % 2]
             self.board.print_map()
 
             count += 1
@@ -74,7 +74,7 @@ class TicTacGame:
         :return True or False:
         """
         if count == 9:
-            print('Draw!!!')
+            print('End of the game, you have a draw')
             return False
 
         win_combinations = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 4, 8), \
@@ -83,7 +83,7 @@ class TicTacGame:
         for comb in win_combinations:
             if self.board.map[comb[0]] == self.board.map[comb[1]] == self.board.map[comb[2]]:
                 sym = self.board.map[comb[0]]
-                print(f'{players[sym]} WIN')
+                print(f'End of the game, {players[sym]} - winner')
 
                 return False
 
