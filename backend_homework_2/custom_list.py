@@ -11,6 +11,7 @@ class CustomList(list):
         :param current_list:
         """
         self.current_list = current_list
+        super().__init__()
 
     def __add__(self, other):
         """
@@ -19,7 +20,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if len(self.current_list) < len(other_list):
             left_list = self.add_for_full(self.current_list, other_list)
             right_list = other_list
@@ -56,7 +56,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if len(self.current_list) < len(other_list):
             left_list = self.add_for_full(self.current_list, other_list)
             right_list = other_list
@@ -84,7 +83,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if len(self.current_list) < len(other_list):
             left_list = self.add_for_full(self.current_list, other_list)
             right_list = other_list
@@ -112,7 +110,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) == sum(other_list):
             return True
 
@@ -125,7 +122,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) < sum(other_list):
             return True
 
@@ -138,7 +134,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) <= sum(other_list):
             return True
 
@@ -151,7 +146,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) != sum(other_list):
             return True
 
@@ -164,7 +158,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) > sum(other_list):
             return True
 
@@ -177,7 +170,6 @@ class CustomList(list):
         :return:
         """
         other_list = self.is_custom(other)
-
         if sum(self.current_list) >= sum(other_list):
             return True
 

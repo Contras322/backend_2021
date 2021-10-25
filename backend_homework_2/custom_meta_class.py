@@ -27,6 +27,7 @@ class CustomMeta(type):
 
         return custom_class
 
+
 class CustomClass(metaclass=CustomMeta):
     """
     Custom class
