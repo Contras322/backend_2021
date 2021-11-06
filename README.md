@@ -12,6 +12,7 @@
 Создаем виртуальное окружение, активируем его:
  
 server $ python3 -m venv <venv_dir_name>
+
 server $ source <venv_dir_name>/bin/activate
 
 Осуществляем WSGI, тестируем:
