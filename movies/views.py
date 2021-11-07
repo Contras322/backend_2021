@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, Http404
-
+from django.http import JsonResponse, Http404, HttpResponse
 
 BASE_MOVIES = {
         'name': ['Бойцовский клуб'],
@@ -34,11 +33,11 @@ def movies(request):
     raise Http404
 
 
-def show_movies(request):
+def show_movies():
     return JsonResponse(BASE_MOVIES)
 
 
-def show_current_movie(request, movie):
+def show_current_movie(movie):
     index = BASE_MOVIES['rating'].index(movie)
 
     return JsonResponse({BASE_MOVIES['name'][index]: BASE_MOVIES['rating'][index]})
