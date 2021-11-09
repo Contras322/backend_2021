@@ -2,10 +2,10 @@
 
 # STATIC FILES FROM NGINX
 
- Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в фаsudo /etc/init.d/nginx startйле nginx.conf):
+ Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в файле nginx.conf):
  
  sudo /etc/init.d/nginx start
- 
+ curl -I curl -I
  http://localhost:8089/static/ 
  
  http://localhost:8089/static/img_bg_1_gradient.jpg
@@ -20,13 +20,13 @@ server $ source <venv_dir_name>/bin/activate
 
 Осуществляем WSGI, тестируем:
 
-curl -I curl -I http://127.0.0.1:8000/
+curl -I http://127.0.0.1:8000/
 
 http://127.0.0.1:8000/
 
 http://127.0.0.1:8000/?a=15&b=11
 
-# PROXY ON NGINX 
+# PROXY ON NGINX curl -I curl -I
 
 Добавляем проксирование в конфигурацию nginx, проверяем работу:
 
