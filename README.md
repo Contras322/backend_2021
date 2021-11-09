@@ -2,7 +2,8 @@
 
 # STATIC FILES FROM NGINX
 
- Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в файле nginx.conf):
+ Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в фаsudo /etc/init.d/nginx startйле nginx.conf):
+ sudo /etc/init.d/nginx start
  
  http://homework3:8089/static/ 
  
