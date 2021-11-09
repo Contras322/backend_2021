@@ -28,14 +28,14 @@ http://127.0.0.1:8000/?a=15&b=11
 
 gunicorn --workers 9 app:app - запуск gunicorn
 
-http://localhost/api/sdfdsf - <list_iterator object at 0x7fa182f0e730>
+http://localhost:8089/api/sdfdsf - <list_iterator object at 0x7fa182f0e730>
 
-http://localhost/api/sdfds - <list_iterator object at 0x7fa1826de130>
+http://localhost:8089/api/sdfds - <list_iterator object at 0x7fa1826de130>
 
 # TEST NGINX AND GUNICORN WITH ab
 
 Осуществим тестирование производительности с помощью ab, используем 4 потока, 5000 запросов, информацию о результатах тестирования поместим в текстовые файлы.\
-1) ab -c 4 -n 5000 http://localhost/static/ > test_static.txt
+1) ab -c 4 -n 5000 http://localhost:8089/static/ > test_static.txt
 2) ab -c 4 -n 5000 http://127.0.0.1:8000/ > test_dynamic.txt
-3) ab -c 4 -n 5000 http://localhost/api/alolo > test_proxy.txt
-4) ab -c 10040 -n 70000 http://localhost/api/ > test_error.txt
+3) ab -c 4 -n 5000 http://localhost:8089/api/alolo > test_proxy.txt
+4) ab -c 10040 -n 70000 http://localhost:8089/api/ > test_error.txt
