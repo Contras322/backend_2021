@@ -24,7 +24,7 @@ http://127.0.0.1:8000/?a=15&b=11
 
 Добавляем проксирование в конфигурацию nginx, проверяем работу:
 
-gunicorn --workers 4 app:app - запуск gunicorn
+gunicorn --workers 9 app:app - запуск gunicorn
 
 http://localhost/api/sdfdsf - <list_iterator object at 0x7fa182f0e730>
 
