@@ -30,9 +30,9 @@ http://127.0.0.1:8000/?a=15&b=11
 
 gunicorn --workers 9 app:app - запуск gunicorn
 
-http://localhost:8089/api/sdfdsf - <list_iterator object at 0x7fa182f0e730>
+http://localhost:8089/api/sdfdsf
 
-http://localhost:8089/api/sdfds - <list_iterator object at 0x7fa1826de130>
+http://localhost:8089/api/sdfds 
 
 # TEST NGINX AND GUNICORN WITH ab
 
