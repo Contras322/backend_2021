@@ -4,9 +4,9 @@
 
  Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в файле nginx.conf):
  
- http://localhost/static/ 
+ http://localhost:8089/static/ 
  
- http://localhost/static/img_bg_1_gradient.jpg
+ http://localhost:8089/static/img_bg_1_gradient.jpg
  
  # SIMPLE WSGI APP WITH GUNICORN
  
