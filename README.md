@@ -5,7 +5,7 @@
  Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в файле nginx.conf):
  
  sudo /etc/init.d/nginx start
- curl -I curl -I
+
  http://localhost:8089/static/ 
  
  http://localhost:8089/static/img_bg_1_gradient.jpg
