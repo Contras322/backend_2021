@@ -20,6 +20,8 @@ server $ source <venv_dir_name>/bin/activate
 
 Осуществляем WSGI, тестируем:
 
+curl -I curl -I http://127.0.0.1:8000/
+
 http://127.0.0.1:8000/
 
 http://127.0.0.1:8000/?a=15&b=11
