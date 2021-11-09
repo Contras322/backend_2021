@@ -3,6 +3,7 @@
 # STATIC FILES FROM NGINX
 
  Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в фаsudo /etc/init.d/nginx startйле nginx.conf):
+ 
  sudo /etc/init.d/nginx start
  
  http://localhost:8089/static/ 
