@@ -5,6 +5,7 @@
  Проверяем работу nginx на отдачу статических файлов (код виртуального сервера находится в файле nginx.conf):
  
  http://localhost/static/ 
+ 
  http://localhost/static/img_bg_1_gradient.jpg
  
  # SIMPLE WSGI APP WITH GUNICORN
@@ -18,6 +19,7 @@ server $ source <venv_dir_name>/bin/activate
 Осуществляем WSGI, тестируем:
 
 http://127.0.0.1:8000/
+
 http://127.0.0.1:8000/?a=15&b=11
 
 # PROXY ON NGINX 
