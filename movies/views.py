@@ -1,43 +1,56 @@
-from django.shortcuts import render
-from django.http import JsonResponse, Http404, HttpResponse
+"""
+Movies views
+"""
+from django.http import JsonResponse, HttpResponseNotAllowed
+from django.views.decorators.csrf import csrf_exempt
+
 
 BASE_MOVIES = {
-        'name': ['Бойцовский клуб'],
+        'movie': ['Бойцовский клуб'],
         'rating': [9],
 }
 
 
-def movies(request):
+@csrf_exempt
+def add_movie(request):
+    """
+    Operations with movies
+    """
     if request.method == 'POST':
         new_movie = request.POST.get('movie', None)
         movie_rating = request.POST.get('rating', None)
         if new_movie and movie_rating:
-            BASE_MOVIES['name'].append(new_movie)
-            BASE_MOVIES['rating'].append(movie_rating)
+            BASE_MOVIES['movie'].append(new_movie)
+            BASE_MOVIES['rating'].append(int(movie_rating))
             return JsonResponse({'OK': 'movie\'s added'})
 
-        else:
-            return JsonResponse({'Error': 'Not found movie or rating'})
+        return JsonResponse({'Error': 'Not found movie or rating'})
 
     elif request.method == 'GET':
-        new_movie = request.GET.get('movie', None)
-        movie_rating = request.GET.get('rating', None)
-        if new_movie and movie_rating:
-            BASE_MOVIES['name'].append(new_movie)
-            BASE_MOVIES['rating'].append(movie_rating)
-            return JsonResponse({'OK': 'movie\'s added'})
+        raise HttpResponseNotAllowed
 
-        else:
-            return JsonResponse({'Error': 'Not found movie or rating'})
-
-    raise Http404
+    raise HttpResponseNotAllowed
 
 
-def show_movies():
+@csrf_exempt
+def show_movies(request):
+    """
+    Show all movies
+    """
+    if request.method == 'GET':
+        raise HttpResponseNotAllowed
+
     return JsonResponse(BASE_MOVIES)
 
 
-def show_current_movie(movie):
-    index = BASE_MOVIES['rating'].index(movie)
+@csrf_exempt
+def show_current_movie(request, rating):
+    """
+    Show info about 1 movie
+    """
+    if request.method == 'GET':
+        raise HttpResponseNotAllowed
 
-    return JsonResponse({BASE_MOVIES['name'][index]: BASE_MOVIES['rating'][index]})
+    index = BASE_MOVIES['rating'].index(rating)
+
+    return JsonResponse({BASE_MOVIES['movie'][index]: BASE_MOVIES['rating'][index]})
