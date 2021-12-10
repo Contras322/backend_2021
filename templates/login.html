@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Sign in {% endblock %}
+{% block content %}
+<div class="row" align="center">
+    {% if not user.is_authenticated %}
+    <div class="row">
+        <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+            <button class="btn btn-primary mb-2">
+                <a href="{% url "social:begin" "github" %}"><font color="white">Login with GitHub</font></a>
+            </button>
+        </div>
+    </div>
+    {% else %}
+    <div class="row" align="center">
+        <div class="col-sm-12 mb-3">
+        <h4 class="text-center">  {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %},
+                you are already log in!
+        </h4>
+        </div>
+        <div class="col-md-8 mx-auto social-container my-2 order-md-1">
+            <button class="btn btn-danger mb-2">
+                <a href="{% url 'logout' %}?next=/">Logout</a>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

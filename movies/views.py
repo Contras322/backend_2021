@@ -4,14 +4,18 @@ from rest_framework.response import Response
 from movies.models import Movie
 from movies.serializer import MovieSerializer
 
+from application.views import user_id_auth
+
 
 class MovieViewSet(viewsets.ViewSet):
+    @user_id_auth
     def list(self, request):
         queryset = Movie.objects.all()
         serializer = MovieSerializer(queryset, many=True)
 
         return Response(serializer.data)
 
+    @user_id_auth
     def retrieve(self, request, pk=None):
         queryset = Movie.objects.all()
         movie = get_object_or_404(queryset, pk=pk)
@@ -19,6 +23,7 @@ class MovieViewSet(viewsets.ViewSet):
 
         return Response(serializer.data)
 
+    @user_id_auth
     def create(self, request):
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
@@ -29,6 +34,7 @@ class MovieViewSet(viewsets.ViewSet):
         else:
             return Response(serializer.errors)
 
+    @user_id_auth
     def update(self, request, pk=None):
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
@@ -38,6 +44,7 @@ class MovieViewSet(viewsets.ViewSet):
 
         return Response({"errors": serializer.errors})
 
+    @user_id_auth
     def delete(self, request, pk=None):
         movie = get_object_or_404(Movie.objects.all(), pk=pk)
         movie.delete()
